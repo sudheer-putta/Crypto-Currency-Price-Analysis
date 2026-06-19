@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crypto currency price analysis using GNN</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* General Styles */
+        body {
+            background-color: #eae7dc;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2d2d2d;
+            padding: 12px 20px;
+        }
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d4cbb8 !important;
+        }
+        .navbar-nav .nav-link {
+            color: #b5b0a1 !important;
+            font-size: 16px;
+            margin-right: 15px;
+            transition: 0.3s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #f5f3ed !important;
+        }
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+        .navbar-toggler-icon {
+            filter: brightness(80%);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 550px;
+            margin-top: 50px;
+            padding: 30px;
+            background: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: #555;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields */
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+        }
+        .form-control:focus {
+            border-color: #9e9e9e;
+            box-shadow: none;
+        }
+
+        /* Button */
+        .btn-custom {
+            background-color: #6d6875;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+            width: 100%;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #4a444b;
+        }
+
+        /* Prediction Box */
+        .prediction-box {
+            margin-top: 20px;
+            background-color: #f0ede5;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            color: #333;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Crypto currency price analysis using GNN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Predict</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analysis">Analysis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Prediction Form -->
+    <div class="container">
+        <h2>Crypto Price Prediction</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <input type="text" class="form-control" name="open_price" placeholder="Open Price" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="high_price" placeholder="High Price" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="low_price" placeholder="Low Price" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="close_price" placeholder="Close Price" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="adj_close_price" placeholder="Adj Close Price" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="volume" placeholder="Volume" required>
+            </div>
+            <button type="submit" class="btn btn-custom">Predict</button>
+        </form>
+
+        {% if predicted_price %}
+        <div class="prediction-box">
+            Predicted Crypto Price: ${{ predicted_price | round(2) }}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
